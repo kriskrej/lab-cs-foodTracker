@@ -4,11 +4,12 @@ using System.Collections.Generic;
 namespace lab_FoodTracker {
     class Program {
         List<Ingredient> ingredients;
+        IngridientDatabase ingridientDb = new IngridientDatabase();
 
         static void Main() {
-            var thisProgram = new Program();
-            thisProgram.AskPlayerForIngridients();
-            thisProgram.ShowIngredients();
+            var currentRecipe = new Program();
+            currentRecipe.AskPlayerForIngridients();
+            currentRecipe.ShowIngredients();
         }
 
         void ShowIngredients() {
@@ -23,15 +24,15 @@ namespace lab_FoodTracker {
             var input = Console.ReadLine();
             var ingredientNames = input.Split(',');
             foreach (var name in ingredientNames)
-                ingredients.Add(new Ingredient(name));
+                TryToAddIngredient(name.Trim());
         }
-    }
 
-    public class Ingredient {
-        public string name;
-
-        public Ingredient(string name) {
-            this.name = name.Trim();
+        private void TryToAddIngredient(string name) {
+            Ingredient found = ingridientDb.Find(name);
+            if (found == null)
+                Console.WriteLine("Nie mamy składnika w bazie: " + name);
+            else
+                ingredients.Add(found);
         }
     }
 }

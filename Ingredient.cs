@@ -1,9 +1,14 @@
 ﻿namespace lab_FoodTracker {
     public class Ingredient {
-        public string name;
+        public string englishName;
 
         public Ingredient(string name) {
-            this.name = name.Trim();
+            this.englishName = name.Trim();
+        }
+
+
+        public override string ToString() {
+            return englishName;
         }
     }
 }

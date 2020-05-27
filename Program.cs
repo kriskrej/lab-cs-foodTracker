@@ -10,12 +10,17 @@ namespace lab_FoodTracker {
             var currentRecipe = new Program();
             currentRecipe.AskPlayerForIngridients();
             currentRecipe.ShowIngredients();
+            currentRecipe.FindRecipe();
+        }
+
+        private void FindRecipe() {
+            var query = new RecipePuppyQuery(ingredients);
         }
 
         void ShowIngredients() {
             Console.WriteLine("Składniki:");
             foreach (var ingredient in ingredients)
-                Console.WriteLine(" * " + ingredient.name);
+                Console.WriteLine(" * " + ingredient.englishName);
         }
 
         void AskPlayerForIngridients() {
@@ -34,5 +39,20 @@ namespace lab_FoodTracker {
             else
                 ingredients.Add(found);
         }
+    }
+
+
+    public class Result {
+        public string title;
+        public string href;
+        public string ingredients;
+        public string thumbnail;
+    }
+
+    public class Example {
+        public string title;
+        public double version;
+        public string href;
+        public IList<Result> results;
     }
 }

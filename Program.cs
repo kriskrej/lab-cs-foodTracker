@@ -40,19 +40,4 @@ namespace lab_FoodTracker {
                 ingredients.Add(found);
         }
     }
-
-
-    public class Result {
-        public string title;
-        public string href;
-        public string ingredients;
-        public string thumbnail;
-    }
-
-    public class Example {
-        public string title;
-        public double version;
-        public string href;
-        public IList<Result> results;
-    }
 }

@@ -5,15 +5,18 @@ using System.Linq;
 namespace lab_FoodTracker {
     internal class IngridientDatabase {
         List<Ingredient> ingredients = new List<Ingredient>() {
-            new Ingredient("chicken"),
-            new Ingredient("garlic"),
+            new Ingredient(new List<string>(){"chicken", "kurczak", "chicen" }),
+            new Ingredient(new List<string>(){"garlic", "czosnek", "garlick", "garlik" }),
         };
 
         public IngridientDatabase() {
         }
 
         public Ingredient Find(string name) {
-            return ingredients.FirstOrDefault(i => i.englishName == name);
+            var ingredientFromList = ingredients.FirstOrDefault(i => i.IsNamed(name));
+            if (ingredientFromList != null)
+                return ingredientFromList;
+            return new Ingredient(new List<string>() { name });
         }
     }
 }

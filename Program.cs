@@ -20,7 +20,7 @@ namespace lab_FoodTracker {
         void ShowIngredients() {
             Console.WriteLine("Składniki:");
             foreach (var ingredient in ingredients)
-                Console.WriteLine(" * " + ingredient.englishName);
+                Console.WriteLine(" * " + ingredient);
         }
 
         void AskPlayerForIngridients() {

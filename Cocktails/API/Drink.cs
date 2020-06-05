@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
-public class Drink {
+public class Recipe {
     public string idDrink;
     public string strDrink;
     public object strDrinkAlternate;
@@ -49,16 +50,27 @@ public class Drink {
     public string strCreativeCommonsConfirmed;
     public string dateModified;
 
-    public string GetNameAndIngredietnsString() {
-        string text = strDrink;
-
+    List<string> GetIngredients() {
         var ingredients = new List<string> { strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5,
                                                 strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10,
                                                 strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15};
-        ingredients = ingredients.Where(i => !string.IsNullOrEmpty(i)).ToList();
-        text += " (" + string.Join(", ", ingredients) + ")";
+        return ingredients.Where(i => !string.IsNullOrEmpty(i)).ToList();
+    }
 
+    internal int CountMatchingIngredients(List<string> ingredientsFromUser) {
+        var ingredientsFromRecipe = GetIngredients();
+        var matching = 0;
 
+        foreach (var userIngredient in ingredientsFromUser)
+            if (ingredientsFromRecipe.Any(i => string.Equals(i, userIngredient, StringComparison.InvariantCultureIgnoreCase)))
+                matching++;
+
+        return matching;
+    }
+
+    public string GetNameAndIngredietnsString() {
+        string text = strDrink;
+        text += " (" + string.Join(", ", GetIngredients()) + ")";
         return text;
     }
 }

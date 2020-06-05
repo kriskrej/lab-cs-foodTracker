@@ -7,7 +7,7 @@ internal class Barman {
 
     internal void HelpUserToComposeCocktail() {
         var ingredients = GetIngredientsFromUser();
-        cocktailsDbApi.FindWithIngredient(ingredients[0]);
+        cocktailsDbApi.FindWithIngredients(ingredients);
     }
 
     private List<string> GetIngredientsFromUser() {
